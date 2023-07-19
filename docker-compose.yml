@@ -1,0 +1,14 @@
+version: "3"
+services:
+  linebot:
+#    build: ./arm64/Dockerfile
+    image: python:linebot
+    container_name: linebot
+#    shm_size: 2gb
+    tty: true
+    command: ["python", "/project/manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+      - 8000:8000
+    volumes:
+      - ./project:/project
+
