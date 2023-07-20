@@ -129,3 +129,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LINE_CHANNEL_ACCESS_TOKEN = ''
 
 LINE_CHANNEL_SECRET = ''
+
+OPEN_API_KEY = ''
