@@ -38,7 +38,7 @@ def get_response_from_chatgpt(message):
         messages=messages
     )
 
-    logging.info(response)
+    #logging.info(response)
 
     completed_text = response.choices[0].message.content
     return completed_text
@@ -85,10 +85,19 @@ def callback(request):
 
             reply_message = get_response_from_chatgpt(message)
 
+            logging.info(reply_message)
+
+            """
+            if reply_message == "是":
+                reply_message = "慢走不送"
+            """
+
+            """
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=reply_message)
             )
+            """
 
     return HttpResponse()
 
