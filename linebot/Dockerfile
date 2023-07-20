@@ -7,7 +7,7 @@ RUN apt-get update \
 RUN ln -s /usr/bin/gcc-10 /usr/bin/gcc
 
 RUN pip install -U pip
-RUN pip install django line-bot-sdk requests
+RUN pip install django line-bot-sdk requests openai
 
 EXPOSE 8000
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
