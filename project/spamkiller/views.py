@@ -11,7 +11,7 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
 
-openai.api_key = "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"
+openai.api_key = settings.OPEN_API_KEY
 
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -24,16 +24,23 @@ logging.basicConfig(level=logging.INFO,
 
 def get_response_from_chatgpt(message):
 
-    response = openai.Completion.create(
-        model='text-davinci-003',
-        prompt=message,
+    messages = []
+    messages.append({"role": "user", "content": "以下是常見的垃圾廣告內容\n團長本身是二寶媽❤️也有在接業配的網紅重視與小孩互動成長目標週週都帶孩子‼️出遊旅行享受美食歡迎入群一起交流分享親子旅遊資訊生活點滴"})
+    messages.append({"role": "user", "content": "以下是常見的垃圾廣告內容\n敢吃敢瘦健康美食❤️在這裡可以教你怎麼吃出理想身材可以一起來交流怎麼吃怎麼瘦"})
+    messages.append({"role": "user", "content": "請判斷下面的內容是否為垃圾廣告，請簡單回答是或否"})
+
+    response = openai.ChatCompletion.create(
+        #model='text-davinci-003',
+        #prompt=message,
+        model="gpt-3.5-turbo",
         max_tokens=128,
-        temperature=0.5
+        temperature=0.5,
+        messages=messages
     )
 
     logging.info(response)
 
-    completed_text = response['choices'][0]['text']
+    completed_text = response.choices[0].message.content
     return completed_text
 
 
